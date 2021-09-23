@@ -14,6 +14,13 @@ sudo apt-get dist-upgrade -y
 
 sudo apt install git -y
 
+## instalando gcc ##
+
+sudo apt-get install gcc -y
+sudo apt-get install make -y
+
+sudo apt --fix-broken install -y
+
 ## criando pasta paraprogramas baixados ##
 
 mkdir /home/$USER/Downloads/progamas
@@ -36,19 +43,11 @@ sudo apt-get update
 sudo snap install spotify
 sudo snap install skype --classic
 sudo snap install photogimp
-sudo snap install sublime-text
+sudo snap install sublime-text --classic
 sudo snap install vlc
 sudo snap install onlyoffice-desktopeditors
 sudo snap install thunderbird
 
-## instalando gcc ##
-
-sudo apt-get install gcc -y
-
-## install LaTex
-
-sudo apt-get install texlive-full -y
-sudo apt-get install texstudio -y
 
 ## install Tweak Tools
 
@@ -60,7 +59,14 @@ sudo apt install torbrowser-launcher -y
 
 sudo apt install htop -y
 
+## install LaTex
+
+sudo apt-get install texlive-full -y
+sudo apt-get install texstudio -y
+
+
 sudo apt-get autoremove -y
 
+reboot
 
 echo "Fim do shellscript"
