@@ -47,6 +47,7 @@ sudo snap install sublime-text --classic
 sudo snap install vlc
 sudo snap install onlyoffice-desktopeditors
 sudo snap install thunderbird
+sudo snap install telegram-desktop
 
 
 ## install Tweak Tools
@@ -64,9 +65,12 @@ sudo apt install htop -y
 sudo apt-get install texlive-full -y
 sudo apt-get install texstudio -y
 
-
-sudo apt-get autoremove -y
+# ----------------------------- PÓS-INSTALAÇÃO ----------------------------- #
+## Finalização, atualização e limpeza##
+sudo apt update && sudo apt dist-upgrade -y
+flatpak update
+sudo apt autoclean
+sudo apt autoremove -y
+# ---------------------------------------------------------------------- #
 
 reboot
-
-echo "Fim do shellscript"
