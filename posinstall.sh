@@ -72,6 +72,11 @@ curl -fsSL https://download.opensuse.org/repositories/home:manuelschneid3r/xUbun
 sudo apt update
 sudo apt install albert -y
 
+## INSTALL FONT FINDER ##
+
+flatpak install --user https://flathub.org/repo/appstream/io.github.mmstick.FontFinder.flatpakref -y
+flatpak --user update io.github.mmstick.FontFinder -y
+
 # ----------------------------- PÓS-INSTALAÇÃO ----------------------------- #
 ## Finalização, atualização e limpeza##
 sudo apt update && sudo apt upgrade && sudo apt dist-upgrade -y
