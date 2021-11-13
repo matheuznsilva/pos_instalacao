@@ -31,7 +31,7 @@ sudo dpkg -i *.deb
 
 ## Programas do repositório ##
 sudo add-apt-repository ppa:nilarimogard/webupd8 -y && sudo apt-get update && sudo apt-get install pulseaudio-equalizer -y
-sudo apt-add-repository ppa:graphics-drivers/ppa  -y
+sudo apt-add-repository ppa:graphics-drivers/ppa -y
 sudo apt-get update
 sudo apt install htop -y
 sudo apt install flatpak -y
@@ -42,10 +42,11 @@ sudo snap install spotify
 sudo snap install gnome-calendar
 sudo snap install code --classic
 sudo snap install eclipse --classic
+sudo snap install brackets --classic
+sudo snap install sublime-text --classic
 ##sudo snap install skype --classic
 ##sudo snap install android-studio --classic
 sudo snap install photogimp
-sudo snap install sublime-text --classic
 sudo snap install vlc
 sudo snap install onlyoffice-desktopeditors
 sudo snap install thunderbird
