@@ -27,6 +27,7 @@ cd ~/Downloads/progamas
 wget -c https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 wget -c https://dl.teamviewer.com/download/linux/version_15x/teamviewer_15.21.4_amd64.deb
 #wget -c https://launchpadlibrarian.net/319770251/pulseeffects_1.313entornosgnulinuxenial-1ubuntu1_amd64.deb
+#wget -qO- <https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh> | bash
 sudo apt --fix-broken install -y
 sudo dpkg -i *.deb
 sudo apt --fix-broken install -y
@@ -42,12 +43,13 @@ sudo apt install htop -y
 sudo apt install flatpak -y
 sudo apt install snapd -y
 sudo apt install curl -y
+sudo apt install stacer -y
 sudo apt-get update
 sudo snap install flutter --classic
 sudo snap install spotify
 sudo snap install gnome-calendar
 sudo snap install code --classic
-sudo snap install eclipse --classic
+#sudo snap install eclipse --classic
 sudo snap install brackets --classic
 sudo snap install sublime-text --classic
 ##sudo snap install skype --classic
