@@ -1,9 +1,12 @@
 
 /************************************************
 *                                               *
-* Autor: Matheus Nascimento e Silva             *
-* Ambiente..: Ubuntu 20.04                      *
-* Compilador: GCC 9.3.0                         *
-* Objetivo..: Shell script de pos-instalação    *
+* --------- INITIAL SETUP SHELLSCRIPT --------- *
+*                                               *
+* AUTHOR: Matheus Nascimento e Silva            *
+* OS.: Ubuntu 22.04 LTS                         *
+* IDE: VsCode 1.67.2                            *
+* COMPILER: GCC 11.2.0                          *
+*                                               *
 *                                               *
 *************************************************/
