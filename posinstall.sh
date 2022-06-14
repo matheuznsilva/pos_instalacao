@@ -7,6 +7,7 @@ sudo rm/var/lib/dpkg/lock-frontend ; sudo rm/var/cache/apt/archives/lock ;
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get dist-upgrade -y
+sudo apt install ubuntu-restricted-extras -y
 
 ## GCC INSTALL ##
 sudo apt-get install gcc -y
