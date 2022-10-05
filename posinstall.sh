@@ -16,6 +16,8 @@ APT_PROGRAMS=(
     htop
     flatpak
     curl
+    python3
+    python3-pip
     stacer
     torbrowser-launcher
     gnome-tweak-tool 
@@ -133,7 +135,7 @@ adding_repository(){
 # ======================= FINISHING INSTALLATION ======================= #
 system_clean(){
     sudo apt-get update && sudo apt-get upgrade -y && sudo apt full-upgrade -y
-    flatpak update
+    flatpak update -y
     sudo apt autoclean -y
     sudo apt autoremove -y
     sudo reboot
