@@ -1,9 +1,9 @@
 ## POS INSTALAÇÃO
-> v14.0
+> v18.0
 ```
 +-----------------------------------------------+
 |                                               |
-| --------- INITIAL SETUP SHELLSCRIPT --------- |
+| ------ INITIAL LINUX SETUP SHELLSCRIPT ------ |
 |                                               |
 | AUTHOR: Matheus N. Silva                      |
 | OS.: Ubuntu 22.04 LTS                         |
