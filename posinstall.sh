@@ -24,6 +24,7 @@ APT_PROGRAMS=(
     gnome-shell-extensions chrome-gnome-shell
     texlive-full
     texstudio
+    net-tools
 )
 
 SNAP_PROGRAMS=(
