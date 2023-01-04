@@ -57,7 +57,7 @@ SEM_COR='\e[0m'
 
 ## UPDATE FUNCTION
 apt_update(){
-    sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y
+    sudo apt update && sudo apt full-upgrade -y && sudo apt dist-upgrade -y && sudo apt autoremove -y
 }
 
 ## CONNECTION TEST
@@ -132,21 +132,12 @@ adding_repository(){
     sudo apt-add-repository ppa:graphics-drivers/ppa -y && sudo apt install nvidia-driver-470 -y
 }
 
-
-# ======================= FINISHING INSTALLATION ======================= #
-system_clean(){
-    sudo apt-get update && sudo apt-get upgrade -y && sudo apt full-upgrade -y
-    flatpak update -y
-    sudo apt autoclean -y
-    sudo apt autoremove -y
-    sudo reboot
-}
-
 # ============================== EXECUTION ============================= #
 
 remove_locks
 connection_test
 remove_locks
+apt_update
 adding_repository
 apt_update
 remove_locks
@@ -155,6 +146,6 @@ apt_update
 install_programs
 install_flatpaks
 apt_update
-system_clean
+sudo reboot
 
 echo -e "${VERDE}[INFO] - Script finalizado, instalação concluída! :)${SEM_COR}"
