@@ -41,6 +41,7 @@ SNAP_PROGRAMS=(
     spotify
     photogimp
     vlc
+    figma-linux
 )
 
 ## DIRECTORIES
