@@ -7,41 +7,43 @@ GOOGLE_CHROME=https://dl.google.com/linux/direct/google-chrome-stable_current_am
 TEAM_VIEWER=https://dl.teamviewer.com/download/linux/version_15x/teamviewer_15.21.4_amd64.deb
 CEREBRO=https://github.com/cerebroapp/cerebro/releases/download/v0.5.0/cerebro_0.5.0_amd64.deb ##-O cerebro.deb 
 PULSE_EFFECTS=https://launchpadlibrarian.net/319770251/pulseeffects_1.313entornosgnulinuxenial-1ubuntu1_amd64.deb
+POSTMAN=https://dl.pstmn.io/download/latest/linux_64
 
 APT_PROGRAMS=(
     ubuntu-restricted-extras
     gcc
-    make
-    snapd
-    htop
-    flatpak
     curl
+    flatpak
+    gnome-shell-extensions chrome-gnome-shell
+    gnome-tweak-tool 
+    htop
+    make
+    mysql-server
+    net-tools
     python3
     python3-pip
+    snapd
     stacer
-    torbrowser-launcher
-    gnome-tweak-tool 
-    gnome-shell-extensions chrome-gnome-shell
     texlive-full
     texstudio
-    net-tools
+    torbrowser-launcher
 )
 
 SNAP_PROGRAMS=(
     ##penjdk-17-jre-headless
-    code
-    flutter
-    sublime-text
     android-studio
-    brackets
-    gnome-calendar
-    thunderbird
-    onlyoffice-desktopeditors
-    telegram-desktop
-    spotify
-    photogimp
-    vlc
+    code
     figma-linux
+    flutter
+    gnome-calendar
+    mysql-workbench-community
+    onlyoffice-desktopeditors
+    photogimp
+    spotify
+    #sublime-text
+    telegram-desktop
+    thunderbird
+    vlc
 )
 
 ## DIRECTORIES
@@ -90,6 +92,7 @@ install_programs(){
     wget -c "$GOOGLE_CHROME"       -P "$DIRECTORY_DOWNLOADS"   
     wget -c "$TEAM_VIEWER"       -P "$DIRECTORY_DOWNLOADS" 
     wget -c "$CEREBRO"       -P "$DIRECTORY_DOWNLOADS" 
+    # wget -c "$POSTMAN"       -P "$DIRECTORY_DOWNLOADS" 
     # wget -c "$PULSE_EFFECTS"       -P "$DIRECTORY_DOWNLOADS" 
 
     ## INSTALL PACKAGES .deb
