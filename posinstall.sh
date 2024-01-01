@@ -17,6 +17,7 @@ APT_PROGRAMS=(
     gnome-shell-extensions chrome-gnome-shell
     gnome-tweak-tool 
     htop
+    libfuse2
     make
     mysql-server
     net-tools
@@ -65,7 +66,7 @@ apt_update(){
 
 ## CONNECTION TEST
 connection_test(){
-    if [! ping -c 1 8.8.8.8 -q &> /dev/null]; then
+    if ! ping -c 1 8.8.8.8 -q &> /dev/null; then
         echo -e "${VERMELHO}[ERROR] - YOU HAVEN'T INTERNET CONNECTION.${SEM_COR}"
         exit 1
     else
@@ -84,26 +85,22 @@ add_archi386(){
     sudo dpkg --add-architecture i386
 }
 
-## INSTALL PROGRAMS .DEB, APT && SNAP
+## INSTALL PROGRAMS .deb, APT and SNAP
 install_programs(){
     echo -e "${VERDE}[INFO] - DOWNLOADING PACKAGES .deb${SEM_COR}"
 
-    mkdir "$DIRECTORY_DOWNLOADS"
-    wget -c "$GOOGLE_CHROME"       -P "$DIRECTORY_DOWNLOADS"   
-    wget -c "$TEAM_VIEWER"       -P "$DIRECTORY_DOWNLOADS" 
-    wget -c "$CEREBRO"       -P "$DIRECTORY_DOWNLOADS" 
-    # wget -c "$POSTMAN"       -P "$DIRECTORY_DOWNLOADS" 
-    # wget -c "$PULSE_EFFECTS"       -P "$DIRECTORY_DOWNLOADS" 
+    mkdir "$DIRECTORY_DOWNLOADS" || true
+    wget -c "$GOOGLE_CHROME" "$TEAM_VIEWER" -P "$DIRECTORY_DOWNLOADS"
 
-    ## INSTALL PACKAGES .deb
+    ## INSTALL .deb PACKAGES
     echo -e "${VERDE}[INFO] - INSTALL PACKAGES .deb${SEM_COR}"
     sudo apt --fix-broken install -y
     sudo dpkg -i $DIRECTORY_DOWNLOADS/*.deb
 
     ## INSTALL PACKAGES APT 
     echo -e "${VERDE}[INFO] - INSTALL PACKAGES APT FROM REPOSITORY${SEM_COR}"
-    for program in ${APT_PROGRAMS[@]}; do
-        if [! dpkg -l | grep -q $program]; then # Only install if not already installed
+    for program in "${APT_PROGRAMS[@]}"; do
+        if ! dpkg -l "$program" &> /dev/null; then # Only install if not already installed
             sudo apt install "$program" -y
             sudo apt --fix-broken install -y
         else
@@ -113,8 +110,8 @@ install_programs(){
 
     ## INSTALL PACKAGES SNAP 
     echo -e "${VERDE}[INFO] - INSTALL PACKAGES APT FROM REPOSITORY${SEM_COR}"
-    for program in ${SNAP_PROGRAMS[@]}; do
-        if [! dpkg -l | grep -q $program]; then # Only install if not already installed
+    for program in "${SNAP_PROGRAMS[@]}"; do
+        if ! snap list "$program" &> /dev/null; then # Only install if not already installed
             sudo snap install "$program" -y
         else
             echo "$program - [INSTALLED]"
@@ -134,6 +131,7 @@ install_flatpaks(){
 adding_repository(){
     ##sudo add-apt-repository ppa:nilarimogard/webupd8 -y && sudo apt-get update && sudo apt-get install pulseaudio-equalizer -y
     sudo apt-add-repository ppa:graphics-drivers/ppa -y && sudo apt install nvidia-driver-470 -y
+    sudo apt-add-repository universe
 }
 
 # ============================== EXECUTION ============================= #
