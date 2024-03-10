@@ -28,6 +28,8 @@ APT_PROGRAMS=(
     texlive-full
     texstudio
     torbrowser-launcher
+    virtualbox
+    virtualbox-ext-pack
 )
 
 SNAP_PROGRAMS=(
