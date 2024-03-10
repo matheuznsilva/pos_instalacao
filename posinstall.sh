@@ -14,8 +14,11 @@ APT_PROGRAMS=(
     gcc
     curl
     flatpak
+    libminizip1
+    libxcb-xinerama0
+    -f    
     gnome-shell-extensions chrome-gnome-shell
-    gnome-tweak-tool 
+   #gnome-tweaks
     htop
     libfuse2
     make
@@ -34,7 +37,7 @@ APT_PROGRAMS=(
 
 SNAP_PROGRAMS=(
     ##penjdk-17-jre-headless
-    android-studio
+    android-studio --classic
     code
     #figma-linux
     #flutter
@@ -101,19 +104,8 @@ add_archi386(){
     sudo dpkg --add-architecture i386
 }
 
-## INSTALL PROGRAMS .deb, APT and SNAP
-install_programs(){
-    echo -e "${VERDE}[INFO] - DOWNLOADING PACKAGES .deb${SEM_COR}"
-
-    mkdir "$DIRECTORY_DOWNLOADS" || true
-    wget -c "$GOOGLE_CHROME" "$TEAM_VIEWER" -P "$DIRECTORY_DOWNLOADS"
-
-    ## INSTALL .deb PACKAGES
-    echo -e "${VERDE}[INFO] - INSTALL PACKAGES .deb${SEM_COR}"
-    sudo apt --fix-broken install -y
-    sudo dpkg -i $DIRECTORY_DOWNLOADS/*.deb
-
-    ## INSTALL PACKAGES APT 
+## INSTALL APT PACKAGES 
+install_APT_Packages(){
     echo -e "${VERDE}[INFO] - INSTALL PACKAGES APT FROM REPOSITORY${SEM_COR}"
     for program in "${APT_PROGRAMS[@]}"; do
         if ! dpkg -l "$program" &> /dev/null; then # Only install if not already installed
@@ -123,23 +115,45 @@ install_programs(){
             echo "$program - [INSTALLED]"
         fi
     done
+}
 
-    ## INSTALL PACKAGES SNAP 
+## INSTALL SNAP PACKAGES 
+install_SNAP_Packages(){
     echo -e "${VERDE}[INFO] - INSTALL PACKAGES SNAP FROM REPOSITORY${SEM_COR}"
     for program in "${SNAP_PROGRAMS[@]}"; do
         if ! snap list "$program" &> /dev/null; then # Only install if not already installed
-            sudo snap install "$program" -y
+            sudo snap install "$program"
         else
             echo "$program - [INSTALLED]"
         fi
-    done
 
-    
+        # Check if installation failed due to lack of --classic option
+        if [ $? -ne 0 ]; then
+            echo -e "${VERDE}[INFO] - Trying again with --classic option${SEM_COR}"
+            sudo snap install --classic "$program"
+        fi
+    done
+}
+
+## INSTALL DEB PACKAGES 
+install_DEB_Packages(){
+    echo -e "${VERDE}[INFO] - DOWNLOADING PACKAGES .deb${SEM_COR}"
+    mkdir "$DIRECTORY_DOWNLOADS" || true
+    wget -c "$GOOGLE_CHROME" "$TEAM_VIEWER" -P "$DIRECTORY_DOWNLOADS"
+
+    ## INSTALL .deb PACKAGES
+    echo -e "${VERDE}[INFO] - INSTALL PACKAGES .deb${SEM_COR}"
+    sudo apt --fix-broken install -y
+    sudo dpkg -i $DIRECTORY_DOWNLOADS/*.deb 
+
+    ## REMOVE INSTALLERS AND DIRECTORY
+    echo -e "${VERDE}[INFO] - REMOVING INSTALLERS AND DIRECTORY${SEM_COR}"
+    rm -rf "$DIRECTORY_DOWNLOADS"
 }
 
 ## INSTALL FLATPAK PROGRAMS
 
-install_flatpaks(){
+install_Flatpaks(){
     echo -e "${VERDE}[INFO] - INSTALL FLATPAK PACKAGES${SEM_COR}"
   
     for ref in "${FLATPAK_PROGRAMS[@]}"; do
@@ -148,27 +162,33 @@ install_flatpaks(){
     done
 }
 
+## INSTALL PROGRAMS .deb, APT, SNAP and Flatpaks
+install_programs(){
+    install_APT_Packages
+    install_SNAP_Packages
+    install_DEB_Packages
+    install_Flatpaks
+}
+
 ## ADDING REPOSITORY
 adding_repository(){
     ##sudo add-apt-repository ppa:nilarimogard/webupd8 -y && sudo apt-get update && sudo apt-get install pulseaudio-equalizer -y
     sudo apt-add-repository ppa:graphics-drivers/ppa -y && sudo apt install nvidia-driver-470 -y
-    sudo apt-add-repository universe
+    sudo apt-add-repository universe -y
 }
 
 # ============================== EXECUTION ============================= #
 
 remove_locks
 connection_test
-remove_locks
 apt_update
 adding_repository
 apt_update
-remove_locks
 add_archi386
 apt_update
 install_programs
-install_flatpaks
 apt_update
+remove_locks
 sudo reboot
 
 echo -e "${VERDE}[INFO] - Script finalizado, instalação concluída! :)${SEM_COR}"
