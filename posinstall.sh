@@ -6,7 +6,6 @@ set -e
 GOOGLE_CHROME=https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 TEAM_VIEWER=https://dl.teamviewer.com/download/linux/version_15x/teamviewer_15.21.4_amd64.deb
 # CEREBRO=https://github.com/cerebroapp/cerebro/releases/download/v0.5.0/cerebro_0.5.0_amd64.deb
-# PULSE_EFFECTS=https://launchpadlibrarian.net/319770251/pulseeffects_1.313entornosgnulinuxenial-1ubuntu1_amd64.deb
 POSTMAN=https://dl.pstmn.io/download/latest/linux_64
 
 APT_PROGRAMS=(
@@ -122,15 +121,9 @@ install_SNAP_Packages(){
     echo -e "${VERDE}[INFO] - INSTALL PACKAGES SNAP FROM REPOSITORY${SEM_COR}"
     for program in "${SNAP_PROGRAMS[@]}"; do
         if ! snap list "$program" &> /dev/null; then # Only install if not already installed
-            sudo snap install "$program"
+            sudo snap install --classic "$program"
         else
             echo "$program - [INSTALLED]"
-        fi
-
-        # Check if installation failed due to lack of --classic option
-        if [ $? -ne 0 ]; then
-            echo -e "${VERDE}[INFO] - Trying again with --classic option${SEM_COR}"
-            sudo snap install --classic "$program"
         fi
     done
 }
@@ -172,7 +165,6 @@ install_programs(){
 
 ## ADDING REPOSITORY
 adding_repository(){
-    ##sudo add-apt-repository ppa:nilarimogard/webupd8 -y && sudo apt-get update && sudo apt-get install pulseaudio-equalizer -y
     sudo apt-add-repository ppa:graphics-drivers/ppa -y && sudo apt install nvidia-driver-470 -y
     sudo apt-add-repository universe -y
 }
@@ -183,7 +175,6 @@ remove_locks
 connection_test
 apt_update
 adding_repository
-apt_update
 add_archi386
 apt_update
 install_programs
