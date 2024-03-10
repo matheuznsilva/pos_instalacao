@@ -83,8 +83,17 @@ connection_test(){
 
 ## REMOVE LOCKS APT
 remove_locks(){
-    sudo rm /var/lib/dpkg/lock-frontend;
-    sudo rm /var/cache/apt/archives/lock;
+    if sudo rm /var/lib/dpkg/lock-frontend; then
+        echo -e "${VERDE}[INFO] - Removed lock file: /var/lib/dpkg/lock-frontend${SEM_COR}"
+    else
+        echo -e "${VERMELHO}[ERROR] - Failed to remove lock file: /var/lib/dpkg/lock-frontend${SEM_COR}"
+    fi
+    
+    if sudo rm /var/cache/apt/archives/lock; then
+        echo -e "${VERDE}[INFO] - Removed lock file: /var/cache/apt/archives/lock${SEM_COR}"
+    else
+        echo -e "${VERMELHO}[ERROR] - Failed to remove lock file: /var/cache/apt/archives/lock${SEM_COR}"
+    fi
 }
 
 ## ADDING/CONFIRMING X86 ARCHITECTURE
