@@ -11,6 +11,7 @@ POSTMAN=https://dl.pstmn.io/download/latest/linux_64
 APT_PROGRAMS=(
     ubuntu-restricted-extras
     gcc
+    git
     curl
     flatpak
     libminizip1
@@ -38,8 +39,8 @@ SNAP_PROGRAMS=(
     ##penjdk-17-jre-headless
     android-studio --classic
     code
-    #figma-linux
-    #flutter
+    figma-linux
+    flutter
     gnome-calendar
     mysql-workbench-community
     onlyoffice-desktopeditors
