@@ -1,24 +1,24 @@
-# POS INSTALAÇÃO DEBIAN/UBUNTU
+# DEBIAN/UBUNTU PRECONFIGURATION
 
-Este repositorio possui um script de pos instalação para distros baseadas no Debian/Ubuntu
+This repository has a preconfiguration script for Debian/Ubuntu based distributions.
 
-## Requisitos
+## Requirements
 
 <div>
   <img src="https://img.shields.io/badge/Debian-A81D33?style=for-the-badge&amp;logo=debian&amp;logoColor=white" alt="ubuntu 22.04LTS">
   <img src="https://img.shields.io/badge/Ubuntu-e95420?style=for-the-badge&amp;logo=ubuntu&amp;logoColor=white" alt="ubuntu 22.04LTS">
 </div>
 
-## Uso
+## Use
 
-Acesse o diretorio onde se encontra o script, clique em cima do script com o botão direito do mouse (ou com o script selecionado pressione "ctrl + i") e clique em propriedades, na aba permissões selecione a caixinha "Executar".
+Access the directory where the script is located, right-click on the script (or with the script selected press "ctrl + i") and click on properties, in the permissions tab select the "Execute" box.
 
-Apos acesse o diretorio utilizando terminal e execute o seguinte comando: 
+Then access the directory using the terminal and execute the following command:
 
     $ ./posinstall.sh
 
-## Status do Projeto
+## Project Status do Projeto
 
-**Status do Projeto: Concluído com ressalvas**
+**Project Status: Completed with reservations**
 
-O projeto está funcional, todavia, ele atende especificamente às minhas necessidades de workspace setup, devendo cada usuário ajusta-lo para lhe atender da melhor forma.
+The project is functional and constantly evolving, however, it specifically meets my workspace setup needs, and each user must adjust it to best suit their needs.

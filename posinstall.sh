@@ -55,7 +55,13 @@ SNAP_PROGRAMS=(
 FLATPAK_PROGRAMS=(
     "https://flathub.org/repo/appstream/io.github.mmstick.FontFinder.flatpakref"
     "https://flathub.org/repo/appstream/com.github.wwmm.easyeffects.flatpakref"
+    "https://flathub.org/repo/appstream/com.github.sdv43.whaler.flatpakref"
 )
+
+
+DOCKER={
+
+}
 
 ## DIRECTORIES
 DIRECTORY_DOWNLOADS="$HOME/Downloads/programs"
@@ -145,6 +151,40 @@ install_DEB_Packages(){
     rm -rf "$DIRECTORY_DOWNLOADS"
 }
 
+docker_install(){
+    echo -e "${VERDE}[INFO] - INSTALLING DOCKER${SEM_COR}"
+
+    # Remove old versions
+    sudo apt-get remove docker docker-engine docker.io containerd runc
+
+    # install dependeces
+#    sudo apt-get update
+    sudo apt-get install ca-certificates curl gnupg
+
+    # Add a oficial docker GPG key 
+    sudo install -m 0755 -d /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+    # Add docker repository
+    echo \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+    # Repository update
+    sudo apt-get update
+
+    # Docker install
+    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+
+    # Installation verify
+    sudo docker run hello-world
+
+    # Add the current user to the docker group to avoid using sudo
+    sudo usermod -aG docker $USER
+
+    echo -e "${VERDE}[INFO] - DOCKER INSTALLED SUCCESSFULLY!${SEM_COR}"
+}
+
 ## INSTALL FLATPAK PROGRAMS
 
 install_Flatpaks(){
@@ -161,6 +201,7 @@ install_programs(){
     install_APT_Packages
     install_SNAP_Packages
     install_DEB_Packages
+    docker_install
     install_Flatpaks
 }
 
